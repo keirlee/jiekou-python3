@@ -43,7 +43,7 @@ shanghai='''
 		<tr >
             <td ><strong>用例ID&nbsp;</strong></td>
             <td><strong>用例名字</strong></td>
-            <td><strong>key</strong></td>
+            <td><strong>page</strong></td>
             <td><strong>请求内容</strong></td>
             <td><strong>url</strong></td>
             <td><strong>请求方式</strong></td>
@@ -86,7 +86,9 @@ def relust(titles,starttime,endtime,passge,fail,id,name,key,coneent,url,meth,yuq
     if type(name) ==list:
         relus=' '
         for i in range(len(name)):
-            relus+=(ceshixiangqing(id[i],name[i],key[i],coneent[i],url[i],meth[i],yuqi[i],json[i],relust[i]))
+            for n in range(0,len(json)):
+                relus += (ceshixiangqing(id[i], name[i], n+1, coneent[i], url[i], meth[i], yuqi[i], json[n], relust[n]))
+            # relus+=(ceshixiangqing(id[i],name[i],key[i],coneent[i],url[i],meth[i],yuqi[i],json[i],relust[i]))
         text=title(titles)+connent+time(starttime,endtime,passge,fail)+shanghai+relus+weibu
     else:
         text=title(titles)+connent+time(starttime,endtime,passge,fail)+shanghai+ceshixiangqing(id,name,key,coneent,url,meth,yuqi,json,relust)+weibu

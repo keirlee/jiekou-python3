@@ -14,18 +14,25 @@ def testinterface():
     list_fail = 0
     list_json = []
     listrelust=[]
+    listjson = []
+    listres = []
     for i in range(len(listurl)):
-        api=TestApi(url=listurl[i],key=listkey[i],connent=listconeent[i],fangshi=listfangshi[i])
-        apicode=api.getcode()
-        apijson=api.getJson()
-        log_can.info_log('inputdata> 参数:%s, url:%s ,返回:%s,预期:%s'%(listconeent[i],listurl[i],apijson,listqiwang[i]))
-        assert_re=assert_in(asserqiwang=listqiwang[i],fanhuijson=apijson)
-        if assert_re=='pass':
-            list_json.append(apijson)
-            listrelust.append('pass')
-            list_pass += 1
-        else:
-            list_fail+=1
-            listrelust.append('fail')
-            list_json.append(apijson)
-    return  listrelust,list_fail,list_pass,list_json
+        for n in range(1,int(listkey[i])+1):
+            print(int(listkey[i]))
+            api = TestApi(url=listurl[i], key=n, connent=listconeent[i], fangshi=listfangshi[i])
+            # apicode = api.getcode()
+            apijson = api.getJson()
+            log_can.info_log(
+                'inputdata> 参数:%s, url:%s ,返回:%s,预期:%s' % (listconeent[i], listurl[i], apijson, listqiwang[i]))
+            assert_re = assert_in(asserqiwang=listqiwang[i], fanhuijson=apijson)
+            if assert_re == 'pass':
+                listjson.append(apijson)
+                listres.append('pass')
+                list_pass += 1
+            else:
+                list_fail += 1
+                listres.append('fail')
+                listjson.append(apijson)
+    # list_json.append(listjson)
+    # listrelust.append(listres)
+    return  listres,list_fail,list_pass,listjson
